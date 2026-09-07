@@ -1,7 +1,7 @@
 export function SolutionSection() {
   return (
     <>
-<section className="w-full bg-surface-container-low py-unit-2xl scroll-mt-20" id="platform-solution">
+<section className="w-full bg-surface-container-low py-unit-2xl scroll-mt-20" id="platform">
 <div className="max-w-7xl mx-auto px-gutter-desktop flex flex-col gap-unit-xl">
 {/*Section Header with Autonomous Badge*/}
 <div className="flex flex-col md:flex-row md:items-end justify-between gap-unit-base">

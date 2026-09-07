@@ -1,7 +1,7 @@
 export function HeroSection({ onLogin }: { onLogin: (dept?: string) => void }) {
   return (
     <>
-<section className="relative w-full bg-surface-bright overflow-hidden pt-unit-xl pb-unit-2xl">
+<section className="relative w-full bg-surface-bright overflow-hidden pt-unit-xl pb-unit-2xl" id="home">
 <div className="max-w-7xl mx-auto px-gutter-desktop">
 <div className="grid grid-cols-1 lg:grid-cols-12 gap-unit-xl items-center">
 {/*Left Hero Narrative*/}

@@ -1,7 +1,7 @@
 export function SiteFooter({ onLogin }: { onLogin: (dept?: string) => void }) {
   return (
     <>
-<footer className="w-full bg-primary text-on-primary pt-unit-xl pb-unit-lg mt-unit-2xl">
+<footer className="w-full bg-primary text-on-primary pt-unit-xl pb-unit-lg mt-unit-2xl" id="about">
 <div className="max-w-7xl mx-auto px-gutter-desktop flex flex-col gap-unit-xl">
 {/*Upper Footer Grid*/}
 <div className="grid grid-cols-1 md:grid-cols-4 gap-unit-xl">
