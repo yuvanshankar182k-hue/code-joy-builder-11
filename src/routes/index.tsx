@@ -1,24 +1,66 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useCallback, useState } from "react";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+import { SiteHeader } from "@/components/landing/SiteHeader";
+import { HeroSection } from "@/components/landing/HeroSection";
+import { InfoStrip } from "@/components/landing/InfoStrip";
+import { ProblemSection } from "@/components/landing/ProblemSection";
+import { SolutionSection } from "@/components/landing/SolutionSection";
+import { DepartmentsSection } from "@/components/landing/DepartmentsSection";
+import { AgenticSection } from "@/components/landing/AgenticSection";
+import { WorkflowSection } from "@/components/landing/WorkflowSection";
+import { SecuritySection } from "@/components/landing/SecuritySection";
+import { CtaSection } from "@/components/landing/CtaSection";
+import { SiteFooter } from "@/components/landing/SiteFooter";
+import { LoginModal } from "@/components/landing/LoginModal";
+
+const title = "KMRL Intelligent Document Management Platform";
+const description =
+  "Agentic AI document intelligence for Kochi Metro Rail Limited: organize, analyze, route and act on engineering, operations, finance, HR and project documents.";
+
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title },
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [department, setDepartment] = useState("ENG");
+
+  const onLogin = useCallback((dept?: string) => {
+    if (dept) setDepartment(dept);
+    setModalOpen(true);
+  }, []);
+
+  const onClose = useCallback(() => setModalOpen(false), []);
+
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="bg-background font-body-md text-on-surface">
+      <SiteHeader />
+      <main className="w-full pt-20 bg-background">
+        <div className="flex flex-col w-full">
+          <HeroSection onLogin={onLogin} />
+          <InfoStrip />
+          <ProblemSection />
+          <SolutionSection />
+          <DepartmentsSection onLogin={onLogin} />
+          <AgenticSection />
+          <WorkflowSection />
+          <SecuritySection />
+          <CtaSection onLogin={onLogin} />
+        </div>
+      </main>
+      <SiteFooter onLogin={onLogin} />
+      <LoginModal open={modalOpen} department={department} onClose={onClose} />
     </div>
   );
 }
