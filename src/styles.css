@@ -75,17 +75,17 @@
   --radius-xl: 0.5rem;
   --radius-full: 0.75rem;
 
-  --font-headline-xl-mobile: "IBM Plex Sans", sans-serif;
-  --font-body-lg: "Inter", sans-serif;
-  --font-body-md: "Inter", sans-serif;
+  --font-headline-xl-mobile: Arial, Helvetica, sans-serif;
+  --font-body-lg: Arial, Helvetica, sans-serif;
+  --font-body-md: Arial, Helvetica, sans-serif;
   --font-code-sm: "monospace", monospace;
-  --font-headline-xl: "IBM Plex Sans", sans-serif;
-  --font-headline-md: "IBM Plex Sans", sans-serif;
-  --font-label-sm: "IBM Plex Sans", sans-serif;
-  --font-headline-lg: "IBM Plex Sans", sans-serif;
-  --font-body-sm: "Inter", sans-serif;
-  --font-label-md: "IBM Plex Sans", sans-serif;
-  --font-headline-lg-mobile: "IBM Plex Sans", sans-serif;
+  --font-headline-xl: Arial, Helvetica, sans-serif;
+  --font-headline-md: Arial, Helvetica, sans-serif;
+  --font-label-sm: Arial, Helvetica, sans-serif;
+  --font-headline-lg: Arial, Helvetica, sans-serif;
+  --font-body-sm: Arial, Helvetica, sans-serif;
+  --font-label-md: Arial, Helvetica, sans-serif;
+  --font-headline-lg-mobile: Arial, Helvetica, sans-serif;
 
   --text-headline-xl-mobile: 26px;
   --text-headline-xl-mobile--line-height: 34px;

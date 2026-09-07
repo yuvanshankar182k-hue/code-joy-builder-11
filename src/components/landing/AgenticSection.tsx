@@ -1,7 +1,7 @@
 export function AgenticSection() {
   return (
     <>
-<section className="w-full bg-surface-container-low py-unit-2xl">
+<section className="w-full bg-surface-container-low py-unit-2xl" id="ai-capabilities">
 <div className="max-w-7xl mx-auto px-gutter-desktop flex flex-col gap-unit-xl">
 {/*Section Header*/}
 <div className="max-w-3xl flex flex-col gap-unit-xs">
