@@ -140,6 +140,15 @@
     padding: 0;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
+  section[id],
+  footer[id] {
+    scroll-margin-top: 7rem;
+  }
+
   body {
     overscroll-behavior: none;
     background-color: var(--color-background);
