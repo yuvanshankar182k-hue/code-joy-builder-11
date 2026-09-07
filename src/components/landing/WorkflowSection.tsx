@@ -48,9 +48,9 @@ export function WorkflowSection() {
 </div>
 {/*Branching Connector SVG Visual*/}
 <div className="w-full max-w-4xl py-unit-xs hidden md:flex justify-center">
-<svg className="w-full h-12 text-secondary" fill="none" preserveaspectratio="none" viewbox="0 0 768 48">
+<svg className="w-full h-12 text-secondary" fill="none" preserveAspectRatio="none" viewBox="0 0 768 48">
 {/*Center drop*/}
-<path d="M384 0 V24 M128 24 H640 M128 24 V48 M384 24 V48 M640 24 V48" stroke="currentColor" stroke-dasharray="4 4" stroke-width="2" /></path>
+<path d="M384 0 V24 M128 24 H640 M128 24 V48 M384 24 V48 M640 24 V48" stroke="currentColor" strokeDasharray="4 4" strokeWidth="2" />
 </svg>
 </div>
 {/*STEP 3: THREE PARALLEL SPECIALIZED AGENTS*/}
@@ -100,8 +100,8 @@ export function WorkflowSection() {
 </div>
 {/*Reverse Branching Connector SVG Visual*/}
 <div className="w-full max-w-4xl py-unit-xs hidden md:flex justify-center">
-<svg className="w-full h-12 text-secondary" fill="none" preserveaspectratio="none" viewbox="0 0 768 48">
-<path d="M128 0 V24 M640 0 V24 M384 0 V24 M128 24 H640 M384 24 V48" stroke="currentColor" stroke-dasharray="4 4" stroke-width="2" /></path>
+<svg className="w-full h-12 text-secondary" fill="none" preserveAspectRatio="none" viewBox="0 0 768 48">
+<path d="M128 0 V24 M640 0 V24 M384 0 V24 M128 24 H640 M384 24 V48" stroke="currentColor" strokeDasharray="4 4" strokeWidth="2" />
 </svg>
 </div>
 {/*STEP 4: ROUTING AGENT*/}
