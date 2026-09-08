@@ -60,8 +60,14 @@ export function LoginModal({ open, department, onClose }: Props) {
     <div
       className="fixed inset-0 z-50 bg-primary/80 backdrop-blur-sm flex items-center justify-center p-gutter-mobile"
       id="login-modal"
+      role="dialog"
+      aria-modal="true"
+      onClick={onClose}
     >
-      <div className="bg-surface-container-lowest w-full max-w-lg rounded-xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+      <div
+        className="bg-surface-container-lowest w-full max-w-lg rounded-xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200"
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className="bg-primary text-on-primary p-unit-base flex items-center justify-between">
           <div className="flex items-center gap-unit-sm">
             <div className="w-8 h-8 rounded bg-primary-container flex items-center justify-center text-primary-fixed">
