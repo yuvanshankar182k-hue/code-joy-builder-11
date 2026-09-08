@@ -43,17 +43,15 @@ export function LoginModal({ open, department, onClose }: Props) {
 
   const onSubmit = (event: FormEvent) => {
     event.preventDefault();
-    setFeedback({
-      text: `Verifying credentials for ${empId} against ${dept} directory...`,
-      tone: "pending",
+    const steps: { text: string; tone: "pending" | "success" }[] = [
+      { text: `Verifying credentials for ${empId || "employee"}...`, tone: "pending" },
+      { text: `Checking intranet access for ${dept} directory...`, tone: "pending" },
+      { text: `Authenticated. Redirecting to ${dept} Workbench...`, tone: "success" },
+    ];
+    steps.forEach((step, i) => {
+      window.setTimeout(() => setFeedback(step), i * 900);
     });
-    window.setTimeout(() => {
-      setFeedback({
-        text: `Intranet SSO Token Validated. Redirecting to ${dept} Workbench...`,
-        tone: "success",
-      });
-      window.setTimeout(onClose, 1200);
-    }, 1000);
+    window.setTimeout(onClose, steps.length * 900 + 900);
   };
 
   if (!open) return null;
@@ -62,8 +60,14 @@ export function LoginModal({ open, department, onClose }: Props) {
     <div
       className="fixed inset-0 z-50 bg-primary/80 backdrop-blur-sm flex items-center justify-center p-gutter-mobile"
       id="login-modal"
+      role="dialog"
+      aria-modal="true"
+      onClick={onClose}
     >
-      <div className="bg-surface-container-lowest w-full max-w-lg rounded-xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+      <div
+        className="bg-surface-container-lowest w-full max-w-lg rounded-xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200"
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className="bg-primary text-on-primary p-unit-base flex items-center justify-between">
           <div className="flex items-center gap-unit-sm">
             <div className="w-8 h-8 rounded bg-primary-container flex items-center justify-center text-primary-fixed">
@@ -169,13 +173,22 @@ export function LoginModal({ open, department, onClose }: Props) {
             </p>
           </div>
 
-          <button
-            className="w-full h-11 bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md rounded-lg shadow-md flex items-center justify-center gap-unit-xs transition-all"
-            type="submit"
-          >
-            <span className="material-symbols-outlined text-[18px]">lock_open</span>
-            <span>Authenticate with KMRL Intranet</span>
-          </button>
+          <div className="flex items-center gap-unit-sm">
+            <button
+              className="flex-1 h-11 bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md rounded-lg shadow-md flex items-center justify-center gap-unit-xs transition-all"
+              type="submit"
+            >
+              <span className="material-symbols-outlined text-[18px]">lock_open</span>
+              <span>Login</span>
+            </button>
+            <button
+              className="h-11 px-unit-base border border-outline-variant text-primary font-label-md text-label-md rounded-lg hover:bg-surface-container transition-colors"
+              type="button"
+              onClick={onClose}
+            >
+              Cancel
+            </button>
+          </div>
 
           {feedback ? (
             <div

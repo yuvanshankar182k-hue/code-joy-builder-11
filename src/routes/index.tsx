@@ -45,7 +45,7 @@ function Index() {
 
   return (
     <div className="bg-background font-body-md text-on-surface">
-      <SiteHeader />
+      <SiteHeader onLogin={onLogin} />
       <main className="w-full pt-20 bg-background">
         <div className="flex flex-col w-full">
           <HeroSection onLogin={onLogin} />
