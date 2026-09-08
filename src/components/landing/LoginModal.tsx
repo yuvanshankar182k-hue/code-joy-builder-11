@@ -173,13 +173,22 @@ export function LoginModal({ open, department, onClose }: Props) {
             </p>
           </div>
 
-          <button
-            className="w-full h-11 bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md rounded-lg shadow-md flex items-center justify-center gap-unit-xs transition-all"
-            type="submit"
-          >
-            <span className="material-symbols-outlined text-[18px]">lock_open</span>
-            <span>Authenticate with KMRL Intranet</span>
-          </button>
+          <div className="flex items-center gap-unit-sm">
+            <button
+              className="flex-1 h-11 bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md rounded-lg shadow-md flex items-center justify-center gap-unit-xs transition-all"
+              type="submit"
+            >
+              <span className="material-symbols-outlined text-[18px]">lock_open</span>
+              <span>Login</span>
+            </button>
+            <button
+              className="h-11 px-unit-base border border-outline-variant text-primary font-label-md text-label-md rounded-lg hover:bg-surface-container transition-colors"
+              type="button"
+              onClick={onClose}
+            >
+              Cancel
+            </button>
+          </div>
 
           {feedback ? (
             <div
