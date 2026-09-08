@@ -19,7 +19,7 @@ export function SiteHeader({ onLogin }: Props) {
   useEffect(() => {
     const onScroll = () => {
       const marker = window.scrollY + 140;
-      let current = NAV[0].id;
+      let current = "home";
       for (const item of NAV) {
         const el = document.getElementById(item.id);
         if (el && el.offsetTop <= marker) current = item.id;
