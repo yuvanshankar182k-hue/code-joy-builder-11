@@ -30,17 +30,10 @@ export function HeroSection({ onLogin }: { onLogin: (dept?: string) => void }) {
 <span className="material-symbols-outlined text-[18px]">verified_user</span>
 <span>Employee Login</span>
 </button>
-<button
-  className="inline-flex items-center gap-unit-xs bg-surface-container-lowest text-primary hover:bg-surface-container font-label-md text-label-md px-unit-lg py-unit-sm rounded-lg shadow-sm transition-all"
-  onClick={() => {
-    setTimeout(() => {
-      document.getElementById('platform')?.scrollIntoView({ behavior: 'smooth' });
-    }, 2000);
-  }}
->
+<a className="inline-flex items-center gap-unit-xs bg-surface-container-lowest text-primary hover:bg-surface-container font-label-md text-label-md px-unit-lg py-unit-sm rounded-lg shadow-sm transition-all" href="#platform-solution">
 <span>Explore Platform</span>
 <span className="material-symbols-outlined text-[16px]">arrow_downward</span>
-</button>
+</a>
 </div>
 {/*Live Orchestrator Footnote*/}
 <div className="flex items-center gap-unit-md pt-unit-xs">
