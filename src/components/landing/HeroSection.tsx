@@ -30,7 +30,7 @@ export function HeroSection({ onLogin }: { onLogin: (dept?: string) => void }) {
 <span className="material-symbols-outlined text-[18px]">verified_user</span>
 <span>Employee Login</span>
 </button>
-<a className="inline-flex items-center gap-unit-xs bg-surface-container-lowest text-primary hover:bg-surface-container font-label-md text-label-md px-unit-lg py-unit-sm rounded-lg shadow-sm transition-all" href="#platform-solution">
+<a className="inline-flex items-center gap-unit-xs bg-surface-container-lowest text-primary hover:bg-surface-container font-label-md text-label-md px-unit-lg py-unit-sm rounded-lg shadow-sm transition-all" href="#platform">
 <span>Explore Platform</span>
 <span className="material-symbols-outlined text-[16px]">arrow_downward</span>
 </a>

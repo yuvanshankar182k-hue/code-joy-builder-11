@@ -20,7 +20,7 @@ export function SiteFooter({ onLogin }: { onLogin: (dept?: string) => void }) {
 <div className="flex flex-col gap-unit-xs">
 <span className="font-label-sm text-label-sm text-primary-fixed uppercase tracking-wider font-semibold mb-unit-2xs">Platform Navigation</span>
 <a className="font-body-sm text-body-sm text-on-primary-container hover:text-on-primary transition-colors" href="#">Home</a>
-<a className="font-body-sm text-body-sm text-on-primary-container hover:text-on-primary transition-colors" href="#platform-solution">Platform</a>
+<a className="font-body-sm text-body-sm text-on-primary-container hover:text-on-primary transition-colors" href="#platform">Platform</a>
 <a className="font-body-sm text-body-sm text-on-primary-container hover:text-on-primary transition-colors" href="#departments">Departments</a>
 <a className="font-body-sm text-body-sm text-on-primary-container hover:text-on-primary transition-colors" href="#security">Security</a>
 <button className="text-left font-body-sm text-body-sm text-secondary-fixed hover:text-on-primary transition-colors" onClick={() => onLogin()}>Employee Login</button>
