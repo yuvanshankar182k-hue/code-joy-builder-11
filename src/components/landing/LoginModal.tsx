@@ -43,17 +43,15 @@ export function LoginModal({ open, department, onClose }: Props) {
 
   const onSubmit = (event: FormEvent) => {
     event.preventDefault();
-    setFeedback({
-      text: `Verifying credentials for ${empId} against ${dept} directory...`,
-      tone: "pending",
+    const steps: { text: string; tone: "pending" | "success" }[] = [
+      { text: `Verifying credentials for ${empId || "employee"}...`, tone: "pending" },
+      { text: `Checking intranet access for ${dept} directory...`, tone: "pending" },
+      { text: `Authenticated. Redirecting to ${dept} Workbench...`, tone: "success" },
+    ];
+    steps.forEach((step, i) => {
+      window.setTimeout(() => setFeedback(step), i * 900);
     });
-    window.setTimeout(() => {
-      setFeedback({
-        text: `Intranet SSO Token Validated. Redirecting to ${dept} Workbench...`,
-        tone: "success",
-      });
-      window.setTimeout(onClose, 1200);
-    }, 1000);
+    window.setTimeout(onClose, steps.length * 900 + 900);
   };
 
   if (!open) return null;
