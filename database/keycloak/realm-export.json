@@ -1,0 +1,279 @@
+{
+  "realm": "kmrl-dms",
+  "displayName": "Kochi Metro Rail Limited - Document Management System",
+  "enabled": true,
+  "sslRequired": "external",
+  "registrationAllowed": false,
+  "loginWithEmailAllowed": true,
+  "duplicateEmailsAllowed": false,
+  "resetPasswordAllowed": true,
+  "editUsernameAllowed": false,
+  "bruteForceProtected": true,
+  "permanentLockout": false,
+  "maxFailureWaitSeconds": 900,
+  "waitIncrementSeconds": 60,
+  "quickLoginCheckMilliSeconds": 1000,
+  "minimumQuickLoginWaitSeconds": 60,
+  "maxDeltaTimeSeconds": 43200,
+  "failureFactor": 5,
+  "accessTokenLifespan": 900,
+  "accessTokenLifespanForImplicitFlow": 900,
+  "ssoSessionIdleTimeout": 1800,
+  "ssoSessionMaxLifespan": 36000,
+  "offlineSessionIdleTimeout": 2592000,
+  "refreshTokenMaxReuse": 0,
+  "revokeRefreshToken": true,
+  "defaultSignatureAlgorithm": "RS256",
+  "roles": {
+    "realm": [
+      {
+        "name": "ADMIN",
+        "description": "Elevated cross-department clearance. Bypasses departmental row-level isolation.",
+        "composite": false,
+        "clientRole": false,
+        "attributes": {
+          "clearance": ["cross-department"]
+        }
+      },
+      {
+        "name": "USER",
+        "description": "Standard clearance. Restricted to the user's own department rows.",
+        "composite": false,
+        "clientRole": false,
+        "attributes": {
+          "clearance": ["department-restricted"]
+        }
+      }
+    ]
+  },
+  "defaultRoles": ["USER"],
+  "groups": [
+    {
+      "name": "OM",
+      "path": "/OM",
+      "attributes": {
+        "department_code": ["OM"],
+        "department_name": ["Operations & Maintenance"]
+      },
+      "realmRoles": ["USER"],
+      "clientRoles": {},
+      "subGroups": []
+    },
+    {
+      "name": "FINANCE",
+      "path": "/FINANCE",
+      "attributes": {
+        "department_code": ["FINANCE"],
+        "department_name": ["Finance & Accounts"]
+      },
+      "realmRoles": ["USER"],
+      "clientRoles": {},
+      "subGroups": []
+    },
+    {
+      "name": "LEGAL",
+      "path": "/LEGAL",
+      "attributes": {
+        "department_code": ["LEGAL"],
+        "department_name": ["Legal & Compliance"]
+      },
+      "realmRoles": ["USER"],
+      "clientRoles": {},
+      "subGroups": []
+    },
+    {
+      "name": "HR",
+      "path": "/HR",
+      "attributes": {
+        "department_code": ["HR"],
+        "department_name": ["Human Resources"]
+      },
+      "realmRoles": ["USER"],
+      "clientRoles": {},
+      "subGroups": []
+    }
+  ],
+  "clientScopes": [
+    {
+      "name": "kmrl-department-scope",
+      "description": "Injects KMRL department membership and realm role into the access token.",
+      "protocol": "openid-connect",
+      "attributes": {
+        "include.in.token.scope": "true",
+        "display.on.consent.screen": "false"
+      },
+      "protocolMappers": [
+        {
+          "name": "department-group-membership-mapper",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-group-membership-mapper",
+          "consentRequired": false,
+          "config": {
+            "full.path": "false",
+            "claim.name": "department",
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "userinfo.token.claim": "true",
+            "introspection.token.claim": "true",
+            "multivalued": "true"
+          }
+        },
+        {
+          "name": "realm-roles-mapper",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-realm-role-mapper",
+          "consentRequired": false,
+          "config": {
+            "multivalued": "true",
+            "claim.name": "realm_access.roles",
+            "jsonType.label": "String",
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "userinfo.token.claim": "false",
+            "introspection.token.claim": "true"
+          }
+        },
+        {
+          "name": "username-mapper",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-property-mapper",
+          "consentRequired": false,
+          "config": {
+            "user.attribute": "username",
+            "claim.name": "preferred_username",
+            "jsonType.label": "String",
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "userinfo.token.claim": "true",
+            "introspection.token.claim": "true"
+          }
+        }
+      ]
+    }
+  ],
+  "defaultDefaultClientScopes": [
+    "profile",
+    "email",
+    "roles",
+    "web-origins",
+    "kmrl-department-scope"
+  ],
+  "clients": [
+    {
+      "clientId": "kmrl-backend-api",
+      "name": "KMRL Backend API",
+      "description": "OpenID Connect confidential client for the KMRL DMS FastAPI backend.",
+      "protocol": "openid-connect",
+      "enabled": true,
+      "publicClient": false,
+      "bearerOnly": false,
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": true,
+      "serviceAccountsEnabled": true,
+      "authorizationServicesEnabled": false,
+      "secret": "CHANGE_ME_IN_PRODUCTION_kmrl_backend_api_secret",
+      "clientAuthenticatorType": "client-secret",
+      "redirectUris": [
+        "http://localhost:8000/*",
+        "https://dms.kmrl.gov.in/*"
+      ],
+      "webOrigins": [
+        "http://localhost:8000",
+        "https://dms.kmrl.gov.in"
+      ],
+      "attributes": {
+        "access.token.lifespan": "900",
+        "pkce.code.challenge.method": "S256",
+        "use.refresh.tokens": "true",
+        "client_credentials.use_refresh_token": "false"
+      },
+      "fullScopeAllowed": true,
+      "defaultClientScopes": [
+        "profile",
+        "email",
+        "roles",
+        "web-origins",
+        "kmrl-department-scope"
+      ],
+      "optionalClientScopes": ["address", "phone", "offline_access"],
+      "protocolMappers": [
+        {
+          "name": "audience-mapper",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-audience-mapper",
+          "consentRequired": false,
+          "config": {
+            "included.client.audience": "kmrl-backend-api",
+            "id.token.claim": "false",
+            "access.token.claim": "true",
+            "introspection.token.claim": "true"
+          }
+        }
+      ]
+    }
+  ],
+  "users": [
+    {
+      "username": "kmrl.admin",
+      "email": "admin@kmrl.gov.in",
+      "firstName": "System",
+      "lastName": "Administrator",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "ChangeMe#Admin2024",
+          "temporary": true
+        }
+      ],
+      "realmRoles": ["ADMIN"],
+      "groups": []
+    },
+    {
+      "username": "om.engineer",
+      "email": "om.engineer@kmrl.gov.in",
+      "firstName": "Operations",
+      "lastName": "Engineer",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "ChangeMe#User2024",
+          "temporary": true
+        }
+      ],
+      "realmRoles": ["USER"],
+      "groups": ["/OM"]
+    },
+    {
+      "username": "finance.officer",
+      "email": "finance.officer@kmrl.gov.in",
+      "firstName": "Finance",
+      "lastName": "Officer",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "ChangeMe#User2024",
+          "temporary": true
+        }
+      ],
+      "realmRoles": ["USER"],
+      "groups": ["/FINANCE"]
+    }
+  ],
+  "browserSecurityHeaders": {
+    "contentSecurityPolicy": "frame-src 'self'; frame-ancestors 'self'; object-src 'none';",
+    "xContentTypeOptions": "nosniff",
+    "xFrameOptions": "SAMEORIGIN",
+    "strictTransportSecurity": "max-age=31536000; includeSubDomains"
+  },
+  "eventsEnabled": true,
+  "eventsExpiration": 2592000,
+  "adminEventsEnabled": true,
+  "adminEventsDetailsEnabled": true
+}
